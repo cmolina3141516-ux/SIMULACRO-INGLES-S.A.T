@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <title>SAT English Practice Test - GEA</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }</style>
+</head>
+<body>
+  <div id="root"></div>
+  
+  <script type="text/babel">
+    const { useState, useEffect, useCallback } = React;
+
+    // ==================== ALL 54 QUESTIONS ====================
+    const questionsModule1 = [
+      { id: 1, passage: "The boss said to ______. The rain made the work impossible, and half the materials hadn't been delivered on time. He was too frustrated to think!", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["do what you can", "start the work", "appreciate the sunlight", "call it a day"], correct: 3, explanation: 'To "call it a day" means to give up working. The boss acknowledges that work is too difficult under the conditions, so it would be logical for him to suggest that everyone give up working.' },
+      { id: 2, passage: "Emily had ________ about being invited to Kayla's house. The last time they hung out it hadn't gone very well. In fact, Emily had stormed out angrily after Kayla made some rude comments.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["detainments", "territories", "reservations", "anticipation"], correct: 2, explanation: 'In this context, "reservations" means "doubts." This would be logical given that the two people had not gotten along very well the last time they hung out.' },
+      { id: 3, passage: "The basic engineering degrees—mechanical, electrical, chemical, and civil—are consistently ranked in the top ten degrees in terms of ______ after graduation. As such, someone who wants to earn a high salary in a job after graduation may find an engineering degree to be a good fit.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["expenditure", "compensation", "enterprises", "reimbursement"], correct: 1, explanation: 'While all of the choices are in some way related to money or business, only "compensation" makes sense in terms of referring to the likely salaries that engineers could receive.' },
+      { id: 4, passage: "The issue is that car testers just don't use female dummies. A female dummy was first requested by testers in the 1980s and wasn't incorporated into tests by the National Highway Safety and Traffic Administration (NHSTA) until 2003. That female dummy is not adjusted in any way to make up for the difference in shape and composition between men and women—it is just a miniaturized model of the male dummy. In fact, it is so ________ that it only represents the smallest 5 percent of women. In addition, it is only used as a passenger in testing, never as a driver.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["augmented", "built up", "scaled down", "abbreviated"], correct: 2, explanation: 'The narrator states that the crash test dummy only represents the "smallest 5 percent of women," indicating that it is a smaller size. To say something is "scaled down" means that it is made to be smaller.' },
+      { id: 5, passage: "Psychological researchers should be more modest about the certainty of data that involves human behavior. After all, human behavior is more difficult to ________ measure than criteria that other scientific fields assess, like temperature or velocity.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["impulsively", "subjectively", "irrationally", "objectively"], correct: 3, explanation: 'The sentence is focused on scientific measurement, so "objectively" would be most appropriate. The other options would not be used to describe high-quality scientific measurement.' },
+      { id: 6, passage: "Nobody wants to feel easily influenced. Yet, I beg you to hear me out: advertising is everywhere because it works. U.S. companies spend an annual $70 billion in television ads, and this is before we take a look at other mediums of advertising like radios, magazines, website cookies, and even social media \"sponsored\" ads.", question: "Which choice best describes the function of the underlined sentence in the text as a whole?", options: ["To explain the process by which advertising is created", "To critique corporations for misleading, unethical practices", "To give concrete evidence to illustrate the expanse of advertising", "To demonstrate instances when consumers feel consciously manipulated"], correct: 2, explanation: "This sentence provides a statistic and other context intended to show that advertising is pervasive." },
+      { id: 7, passage: 'The following text is from Walt Whitman\'s 1891 poem "A Promise to California."\n\nA promise to California,\nAlso to the great Pastoral Plains, and for Oregon:\nSojourning east a while longer, soon I travel toward you, to remain, to teach robust American love;\nFor I know very well that I and robust love belong among you, inland, and along the Western Sea;\nFor These States tend inland, and toward the Western Sea—and I will also.', question: "Which choice best states the main purpose of the text?", options: ["It outlines how with the skilled narrator's leadership the United States will gain new territory.", "It draws a comparison between how just as the United States has spread, so will the narrator's love spread.", "It compares the geographic and economic features of several U.S. states.", "It sketches a plan for national harmony amidst an ongoing bloody conflict."], correct: 1, explanation: "The final line makes the comparison most clear: just as the United States now spans toward the Western Sea, so will the narrator's love." },
+      { id: 8, passage: 'The following text is adapted from F. Scott Fitzgerald\'s 1920 novel This Side of Paradise.\n\n"Amory."\n"Yes, Beatrice." (Such a quaint name for his mother; she encouraged it.)\n"Dear, don\'t think of getting out of bed yet. I\'ve always suspected that early rising in early life makes one nervous. Clothilde is having your breakfast brought up."\n"All right."', question: "Amory's relationship with his mother is best described as", options: ["traditionally pious.", "unusually friendly.", "blatantly disrespectful.", "cold and distant."], correct: 1, explanation: "Amory's use of his mother's first name indicates a familiar relationship, while her anxiety over him rising too early shows it is kindly." },
+      { id: 9, passage: 'An English professor analyzes the 1917 poem "The River Merchant\'s Life: A Letter" by Li Bai. The professor claims that the poem emphasizes the narrator\'s desire for reunification with her departed husband.', question: "Which quotation from the poem most effectively illustrates the claim?", options: ['"While my hair was still cut straight across my forehead / I played about the front gate, pulling flowers."', '"Lowering my head, I looked at the wall. / Called to, a thousand times, I never looked back."', '"You went into far Ku-to-en, by the river of swirling eddies, / And you have been gone five months."', '"If you are coming down through the narrows of the river, / Please let me know beforehand, / And I will come out to meet you."'], correct: 3, explanation: "This option most directly shows the narrator wishes to reunify with her departed husband, stating he should let her know ahead of time so she can meet him." },
+      { id: 10, passage: "Table 1: Crop | Yield (Unit/Acre) | Nitrogen Removal (Pounds/Acre)\nBarley: 40 | 30\nCorn: 50 | 35\nSoybeans: 30 | 103\nWheat: 40 | 42\nCorn Silage: 15 | 116\nGrass-Hay: 2 | 87\n\nCrop rotation: a nitrogen-fixing plant (legume) is planted one year, depositing nitrogen into the soil. The following year a nitrogen-depleting crop should be planted. After planting a legume, a farmer would be well advised to plant ________.", question: "Which choice most effectively uses data from the graph to complete the example?", options: ["barley, because it has a relatively high rate of nitrogen removal", "corn silage, because it has a relatively high rate of nitrogen removal", "corn, because it has a relatively low rate of nitrogen removal", "wheat, because it has a relatively low rate of nitrogen removal"], correct: 1, explanation: "Since a legume is a nitrogen-fixing plant, the example would be completed by presenting a crop that removes nitrogen from the soil. Corn silage has the highest rate of nitrogen removal of any crop in the table." },
+      { id: 11, passage: 'Secretary of Commerce Don Evans at an economics conference (2004): "I was in Missouri and talked to David Carpenter, CEO of North Kansas City Hospital. He told me 30 doctors had moved from Missouri to Kansas because Kansas had passed tort reform and put caps in place. You see it happening all across America, where doctors are moving around trying to find a more friendly environment."', question: "Which finding, if true, would best support Evans's overall argument?", options: ["A survey indicated that 85% of doctors prefer to work close to the community they treat.", "Cities with unlimited lawsuit caps had 15% greater life satisfaction.", "States with tort reforms saw 20% more businesses relocate to their territories.", "Medical practices are 30% more likely to move to states with populations over 10 million."], correct: 2, explanation: "The author makes an argument in favor of lawsuit reform. This finding provides direct statistical support that tort reform results in businesses relocating to more tort-friendly locations." },
+      { id: 12, passage: '"An Encounter" by James Joyce (1914). A young narrator searches for release from daily routine.\n\nAn English student claims the narrator\'s willingness to follow school requirements is "half-hearted."', question: 'Which quotation most effectively illustrates this claim?', options: ['"Everyone was incredulous when it was reported that he had a vocation for the priesthood."', '"We bought some biscuits and chocolate which we ate sedulously as we wandered through the squalid streets."', '"Then he began to talk of school and of books. He asked us whether we had read the poetry of Thomas Moore."', '"But when the restraining influence of the school was at a distance I began to hunger again for wild sensations."'], correct: 3, explanation: "The narrator voices discontent with school requirements and his attention toward other 'wild sensations,' supporting the idea that his interest in studies is half-hearted." },
+      { id: 13, passage: "Many studies suggest that while exercising and diet can reduce cholesterol, genes play a crucial role in cardiovascular disease. This is seen in polar bears—among the most fat-obsessed animals, yet they don't experience cardiovascular complications. About half a polar bear's weight is fat and its cholesterol is high enough to cause serious disease in humans; even so, ________", question: "Which choice most logically completes the text?", options: ["polar bears have a varied diet despite the harsh environment.", "heart attacks are not a concern for polar bears.", "polar bears are equally susceptible to cardiac issues.", "cardiovascular disease remains a leading cause of death."], correct: 1, explanation: 'The transition "even so" shows that what follows should contrast with what comes before. Polar bears are in fact not at risk for heart attacks despite their high cholesterol.' },
+      { id: 14, passage: "As Mendeleev assembled the periodic table, he noticed gaps which he hypothesized were undiscovered elements. He went so far as to predict their chemical properties. Years later, the discovery of gallium confirmed Mendeleev's predictions, causing his theory's popularity to skyrocket, and _________", question: "Which choice most logically completes the text?", options: ["his contemporaries allowed Mendeleev limited credit for his work.", "applications to anatomical research naturally followed.", "Mendeleev's scientific curiosity finally found an outlet.", "the periodic table quickly became a standard fixture in chemistry."], correct: 3, explanation: "Since Mendeleev's predictions caused the popularity of his theory to skyrocket, it makes sense that the periodic table would become extremely popular." },
+      { id: 15, passage: "Birdfeeders attract birds but also attract squirrels and chipmunks. A common method to keep them away is putting the feeder on a tall pole at least five feet from bushes and trees and adding a ________", question: "Which choice completes the text conforming to Standard English?", options: ["baffle; a cone-shaped device that prevents squirrels from climbing the pole.", "baffle: a cone-shaped device that prevents—squirrels from climbing the pole.", "baffle (a cone-shaped device that prevents squirrels from climbing the pole).", "baffle, a cone-shaped device, that prevents squirrels from climbing the pole."], correct: 2, explanation: "Choice (C) properly uses parentheses to set aside the parenthetical phrase that describes what a baffle is." },
+      { id: 16, passage: "When it comes to sports, it can be difficult to be objective. In my opinion, my favorite soccer team's head coach is far better than ________", question: "Which choice completes the text conforming to Standard English?", options: ["that of their archrivals.", "their archrivals'", "their archrivals.", "those of their archrivals'"], correct: 0, explanation: 'To make a logical comparison, the head coach of one team needs to be compared to the head coach of the other team. "That of" substitutes for "head coach."' },
+      { id: 17, passage: "Today, the concept of the high school rock band ______ yet students still have lofty dreams of making a career out of something equally improbable: social media.", question: "Which choice completes the text conforming to Standard English?", options: ["is out of a bit of style,", "is of style out a bit,", "style is a bit out of,", "is a bit out of style,"], correct: 3, explanation: 'Choice (D) puts the words in the most logical order, using the idiom "a bit out of style."' },
+      { id: 18, passage: "The possibility of becoming a physician assistant or nurse practitioner allows students to become health care professionals who ________ people without the rigors of medical school and associated student debt.", question: "Which choice completes the text conforming to Standard English?", options: ["helps", "helping", "helped", "help"], correct: 3, explanation: '"Help" matches both the plural subject "professionals" and the present tense of the sentence.' },
+      { id: 19, passage: "Rodents only make up a portion of a ________ Servals will also use their large ears to listen carefully for the flutter of bird wings overhead or the buzz of an insect nearby.", question: "Which choice completes the text conforming to Standard English?", options: ["serval's diet.", "servals diets.", "servals' diet.", "serval's diets'."], correct: 0, explanation: 'Choice (A) uses the apostrophe to show the singular serval possesses its diet. "Serval" must be singular since "a" precedes it.' },
+      { id: 20, passage: 'George Balanchine, first artistic director of the New York City Ballet, was prolific choreographer of many _______ them the ballets "Jewels" and "Cabin in the Sky."', question: "Which choice completes the text conforming to Standard English?", options: ["works among", "works, among", "works; among", "works among,"], correct: 1, explanation: "This option separates the independent clause from the dependent clause at the end." },
+      { id: 21, passage: "Even in his short life, Cannon managed to make an enduring difference. __________\n\nIn his wake, Native American art was refreshed, moving away from strict rules that had governed traditional forms and into a new space where artists could be more expressive.", question: "Which choice completes the text conforming to Standard English?", options: ["Art historians trace the resurgence and change; in Native American art to a movement that started with Cannon.", "Art historians trace the resurgence, and change in Native American art to a movement that started with Cannon.", "Art historians trace the resurgence and change in Native American art to a movement that started with Cannon.", "Art historians trace the resurgence and change in Native American art—to a movement—that started with Cannon."], correct: 2, explanation: "No punctuation is needed to break up this sentence." },
+      { id: 22, passage: "Melodies are so loved that people hum them even when concentrating on other things. Beats are so universally loved that babies dance to them. ________ in music.\n\nHumans have used them to express joy, sadness, heartache, love, and pain.", question: "Which choice completes the text conforming to Standard English?", options: ["These two things (the melodical notes and the beats), come together", "These two things the melodical notes and the beats, come together", "These two things—the melodical notes and the beats—come together", "These two things—the melodical notes and the beats, come together"], correct: 2, explanation: "Choice (C) appropriately uses dashes to set aside the parenthetical phrase." },
+      { id: 23, passage: "Technology has transformed how job seekers present qualifications. ______ the old paper resume needed to be concise, your online career profile can be much more thorough.", question: "Which choice completes the text with the most logical transition?", options: ["Whereas", "Since", "Because", "Moreover"], correct: 0, explanation: '"Whereas" provides a contrast between the ideas that a resume should be concise and an online profile can be more thorough.' },
+      { id: 24, passage: "Working class families buy in neighborhoods where home values are unpredictable. ______ they will face further financial instability; meanwhile, the privileged few who can afford real estate in major cities will see their returns peak.", question: "Which choice completes the text with the most logical transition?", options: ["Unexpectedly,", "Paradoxically,", "In contrast,", "Hence,"], correct: 3, explanation: '"Hence" indicates a cause-and-effect relationship between the challenging housing market and working-class families facing further financial instability.' },
+      { id: 25, passage: "While conducting research, a student took these notes:\n\nGyoja monks, also known as Marathon monks, are a Buddhist group in Japan.\nEach monk, over seven years, walks around 27,000 miles, generally at a rate of 25 miles per day for months on end.\nToward the end of the seven years, the monks will walk up to 52 miles per day.\nThe grueling physical demands of completing this task on little food or sleep often proves to be fatal—only around 50 monks have completed the task in the past 135 years.\nThis challenge of prayer, meditation, and physical discipline, when completed, leads to the monk being known as a living saint.", question: "The student wants to emphasize the physical demands of being a Gyoja monk. Which choice most effectively uses relevant information from the notes to accomplish this goal?", options: ["The Gyoja monks walk up to an incredible 52 miles per day on very little food and sleep.", "Gyoja monks sometimes walk about 25 miles per day, a task that many people might find challenging.", "Those who want to become Gyoja monks must dedicate seven straight years of their lives to this challenge.", "While the spiritual introspection might be psychologically burdensome, the public recognition makes the work worthwhile."], correct: 0, explanation: "Choice (A) best emphasizes the physical demands since it states they walk 52 miles a day with very little food and sleep." },
+      { id: 26, passage: "While researching a topic, a student has taken the following notes:\n\nThe type of springs used in the seating surface of furniture impacts comfort and durability.\nFurniture constructed with eight-way hand-tied coil springs can be expected to be extremely durable and very comfortable to sit on.\nEight-way hand-tied coil springs involve a labor-intensive fabrication process.\nSinuous springs are more common than eight-way hand-tied coil springs.\nSinuous springs have a wide range of costs due to flexibility in the quality of the materials used.", question: "The student wants to make a generalization about the makeup of typical furniture. Which choice most effectively uses relevant information from the notes to accomplish this goal?", options: ["Since most consumers seek to maximize comfort, it is more likely that coil springs would be found in a typical piece of furniture than would sinuous springs.", "Most pieces of furniture are made using a labor-intensive crafting process.", "It is more likely that the springs in an everyday piece of furniture are sinuous than coil.", "Both sinuous and coil springs are equally found throughout the components of typical furniture, from the backs to the seats."], correct: 2, explanation: "Choice (C) makes a generalization consistent with the notes that sinuous springs are more common." },
+      { id: 27, passage: "While researching a topic, a student has taken the following notes:\n\nOffshore wind farms are an increasingly viable source of renewable energy.\nThese wind farms are typically located on the surface of the ocean near coastal cities.\nThe average wind speed offshore tends to be higher than on land since there are fewer geographical obstacles to wind gusts.\nWind farms can often be placed relatively close to major coastal urban areas, thereby reducing the distance needed for electricity transmission.\nWhile wind farms offshore are promising, increased research should be done to minimize the maintenance costs for these facilities.", question: "The student wants to point out a reason why an offshore wind farm would be better than a land-based wind farm. Which choice most effectively uses relevant information from the notes to accomplish this goal?", options: ["Since offshore wind farms provide the possibility of renewable energy, builders should utilize them instead of land-based wind farms.", "Given the higher typical wind speeds offshore, offshore wind farms are more sensible than land-based ones.", "The convenience of having the source of electricity closer to major urban areas makes land-based wind farms more promising than offshore ones.", "The higher maintenance costs associated with offshore wind farms make them less viable overall."], correct: 1, explanation: 'According to the notes, wind speeds offshore "tend to be higher than on land," making (B) a logical reason why offshore wind farms are better.' }
+    ];
+
+    const questionsModule2 = [
+      { id: 28, passage: "We rarely pause mid-recipe to consider the chemistry of cooking, but understanding the chemical reactions in our food will help us become better cooks. Isn't that some food for thought?", question: 'As used in the text, what does the phrase "some food for thought" most nearly mean?', options: ["An appetizing situation", "A next step for researchers", "A plan for actionable change", "Something worth considering"], correct: 3, explanation: "The author uses an idiom ironically, stating that despite a lack of common understanding, chemistry is extremely applicable to cooking—something to think about." },
+      { id: 29, passage: "Despite the wide applicability of the ABC-X model, like any theory, it has faced critiques. One critique is its focus on serious stressor events and inaccessibility to smaller, everyday stressors. Another ________ is its inability to consider how multiple stressors may affect the current situation.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["drawback", "assessment", "trauma", "rumination"], correct: 0, explanation: '"Drawback" means a shortcoming or problem. The narrator discusses problems with the ABC-X model, so "drawback" introduces another problem.' },
+      { id: 30, passage: "Tests should operate as an assessment of what is practiced daily. Classroom teachers who teach to well-written standards ______ that students are prepared for the next grade level.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["assure", "insure", "ensure", "reassure"], correct: 2, explanation: 'To "assure" removes doubt (to a person). To "ensure" makes sure something will happen. Here, classrooms ensure students will be prepared.' },
+      { id: 31, passage: "A folklorist enters a city or village and participates in day-to-day life. They may study a story, joke, dance, dish, or child's game—an apparently trivial practice that, when looked at closely, turns out to be quite ______.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["insignificant", "substantive", "imbecilic", "exuberant"], correct: 1, explanation: "The narrator draws a contrast between something appearing trivial while actually being significant. 'Substantive' means having substance." },
+      { id: 32, passage: "In the 1990s, DDT was largely banned; bedbugs began their comeback. By 2010 their numbers spiked. Due to increased personal travel, they spread faster than ever. Laundromats, hotels, and libraries became ______ for transmission. Bug eggs get tucked into suitcases or library books. In communal living areas, they crawl from apartment to apartment.", question: "Which choice completes the text with the most logical and precise word or phrase?", options: ["agents", "excursions", "hygienics", "meanderings"], correct: 0, explanation: "The text asserts certain things help cause the spread of bedbugs. 'Agent' can mean something that helps bring about a specific effect." },
+      { id: 33, passage: "Studies show younger children are better suited to learn multiple languages, with effects from elevated attentiveness to enhanced musical abilities. Cornell Language Acquisition Lab: elementary learners are 70% more likely to reach intermediate communication. Early language study creates culturally aware students and measurable impacts: students who study before age 10 test better in all core subjects. Greater cognitive development encourages creativity and divergent thinking.", question: "Which choice best states the main purpose of the text?", options: ["To convince readers to study a specific world language", "To provide an evidence-based argument in favor of early learning of multiple languages", "To suggest a curriculum for graduate-level studies", "To argue that biological obstacles to early language learning are difficult to overcome"], correct: 1, explanation: "The text states young children are better suited to learning multiple languages and highlights positive effects, providing evidence for early language learning." },
+      { id: 34, passage: "Text 1: Charlie Chaplin was more than an entertainer. In The Great Dictator (1939), he condemned dictators, prejudice, and xenophobia—clearly commenting on Hitler and fascism. This speech is widely regarded as one of the most powerful performances, ironic since Chaplin was a silent film star.\n\nText 2: Spielberg is a master of the close-up. Critics find this manipulative, suggesting the audience should respond with shock even if not emotionally earned. What some call a cheap trick, others call engaging cinema.", question: 'Based on the texts, what would the "critics" in Text 2 most likely say about Chaplin\'s speech?', options: ["The emotional response it evokes is well earned.", "It is overly focused on political activism.", "Without vocal accompaniment, a silent film cannot be poignant.", "Attempts to prompt a visceral reaction are unwarranted."], correct: 0, explanation: "Text 2 suggests Spielberg's emotional responses may not be earned because they're prompted by watching character reactions. Chaplin's speech has intellectual substance, implying an emotional response is based on something substantive." },
+      { id: 35, passage: "From Willa Cather's My Ántonia (1918): When Jim was an obscure young lawyer in New York, his career was advanced by a brilliant marriage to Genevieve Whitney, daughter of a distinguished man. It was said she married this unknown man from the West out of bravado after being jilted by her cousin.", question: "Based on the text, the narrator likely believes Jim married his wife", options: ["out of love for her intellect.", "because of professional ambition.", "due to sincere love for her.", "given her sympathy for his poverty."], correct: 1, explanation: "Jim was struggling to make it in New York. The marriage to the daughter of a distinguished man helped him advance. The implication is he married for her connections to advance his career." },
+      { id: 36, passage: "From Octave Uzanne's The End of Books (1894): If by books you mean printed collections of paper, I do not believe Gutenberg's invention can do otherwise than fall into desuetude. Printing has changed Europe's destiny and governed opinion through books, pamphlets, and newspapers—reigning despotically over the mind of man since 1436. It is threatened by devices for registering sound.", question: "Based on the text, the narrator believes printing's impact on history could be described as", options: ["extremely significant.", "largely irrelevant.", "indisputably oppressive.", "uniformly militaristic."], correct: 0, explanation: "The author describes printing's tremendous impact: it changed Europe's destiny, governed opinion, and reigned over the mind of man." },
+      { id: 37, passage: "Mary Shelley's The Last Man (1826). The narrator suggests the greatest obstacle to his father's success is inability to follow through on commitments:", question: "Which quotation most effectively illustrates the claim?", options: ['"During the short years of thoughtless youth, he was adored by the high-bred triflers of the day."', '"The fiend of gambling, which fully possessed [my father], made his good resolutions transient, his promises vain."', '"With the quick sensibility peculiar to his temperament, he perceived his power in the brilliant circle to be on the wane."', '"The king married; and the haughty princess of Austria looked with harsh eyes on his defects."'], correct: 1, explanation: "This shows the speaker believes gambling made his father's good resolutions transient and promises vain—an inability to follow through." },
+      { id: 38, passage: "Figure 1: Local Time of Day (24-hour clock) shows evening hours with highest tornado occurrence.\nFigure 2: Tornadoes by Month shows April, May, June with highest rates.\n\nMeteorologists hypothesize that by observing common tornado formation conditions, they can better predict likelihood and build public awareness.", question: "Given the meteorologists' goal, they should inform the public of increased likelihood at __________", options: ["midday in summer.", "nighttime in fall.", "sunset in springtime.", "sunrise in winter."], correct: 2, explanation: "Figure 1 shows evening hours have highest occurrence. Figure 2 shows spring months (April-June) have highest rates. Evening in spring is the most likely time." },
+      { id: 39, passage: "Rousseau's The Social Contract (1763). The central tenet is that man must give himself entirely to the state to ensure social order:", question: "Which quotation most effectively illustrates the claim?", options: ['"Man was born free, but everywhere he is in chains."', '"This is the fundamental problem; the social contract offers a solution to it."', '"Each individual immediately recovers his primitive rights whenever any violation of the social contract occurs."', '"The individual member alienates himself totally to the whole community together with all his rights."'], correct: 3, explanation: "Giving oneself entirely to the state means giving up personal ambitions for society's benefit. Choice (D) shows the individual alienating himself to the whole community." },
+      { id: 40, passage: "Chart: U.S. 30-year fixed mortgage rates decreased throughout 2020 to a five-year low of less than 3%.\n\nEconomists observe that during recession, central banks lower interest rates to make loans less expensive. Lower rates help consumers save money, stimulating the economy. Economists hypothesize that in the 2020 recession, interest rates on loan products would decrease.", question: "Which choice most effectively uses data from the chart to support the hypothesis?", options: ["While the U.S. mortgage rate is low historically, it stayed constant during the recession.", "The interest rate on 30-year mortgages rose to 3.7% after the recession.", "U.S. 30-year fixed mortgage rates generally decreased throughout 2020 to a five-year low of less than 3%.", "Mortgage payments for the average American increased after the recession."], correct: 2, explanation: "The economists hypothesize interest rates should decrease after 2020. Choice (C) correctly points out mortgage rates decreased during this time." },
+      { id: 41, passage: "In southern Ohio, new apartments replace forests. Surprisingly, Species X bird populations grew. Group 1: growth is due to detrimental changes elsewhere, causing migration. Group 2: the new landscape is more suitable, attracting more birds.", question: "Which finding most directly supports Group 2's hypothesis?", options: ["Areas in northern Ohio cleared trees, forcing Species X to find new habitat.", "Species X preferred habitat is along tree line edges, so land fragmentation creates more edges.", "Natural predators of Species X in southern Ohio have increased due to reintroduction.", "River-based pollutants have increased throughout southern Ohio."], correct: 1, explanation: "Group 2 argues the landscape became more suitable. Choice (B) supports this: construction creates fragmentation, creating more edges along tree lines that birds prefer." },
+      { id: 42, passage: "Mites reproduce within bee colonies. The female mite enters brood cells, lays eggs on the larva. When the new bee emerges, it already has mites and is weakened. No one can see into capped cells to know infestation levels. This makes mites difficult to eliminate since, at any given time, _____________", question: "Which choice most logically completes the text?", options: ["the queen bee has resilience to overcome infestation.", "the number of worker bees exceeds drone bees.", "a beekeeper can use thermal imagery to detect mites.", "there are more mites breeding in capped cells treatments may not reach."], correct: 3, explanation: "Bees cannot see into capped cells. Choice (D) underscores mites breeding inside capped cells that treatments cannot reach." },
+      { id: 43, passage: "Someone with mastery of problem-solving approaches may find multiple applications for critical thinking skills. ________ was an expert in particle physics and helped solve the Challenger space shuttle disaster mystery.", question: "Which choice completes the text conforming to Standard English?", options: ["American theoretical physicist, Richard Feynman", "American theoretical physicist, Richard Feynman,", "American theoretical physicist Richard Feynman", "American, theoretical physicist Richard Feynman,"], correct: 2, explanation: 'No commas needed since "American theoretical physicist" is not sufficiently specific to be one and the same as "Richard Feynman."' },
+      { id: 44, passage: "When taking out a loan, the fine print is key. Understand the differences between fixed ________ throughout the loan term, and adjustable rates which can change over time.", question: "Which choice completes the text conforming to Standard English?", options: ["interest rates, that remain constant", "interest rates, which remain constant", "interest rates which remain constant", "interest rates; remain constant"], correct: 1, explanation: '"Which" sets aside a nonessential description. The clarification about constancy could be removed and the sentence would still be logical.' },
+      { id: 45, passage: "After varnish removal, repair begins. New varnish is applied and before drying, new paint is mixed into damaged areas. This method ______ for old paint to be preserved under varnish, but for the painting to have a 'face lift' and look new on the surface.", question: "Which choice completes the text conforming to Standard English?", options: ["allowed", "would of allowed", "will have allowed", "allows"], correct: 3, explanation: "Surrounding sentences use present tense verbs. 'Allows' is consistent with present tense and singular subject 'method.'" },
+      { id: 46, passage: "For most students, social media is part of life. _________ inundated with pictures and videos from 'influencers' who appear to live lavish lifestyles paid for through sponsorships and ad revenues.", question: "Which choice completes the text conforming to Standard English?", options: ["Regardless of what platform they're on; they are", "Regardless of what platform their on they are", "Regardless of what platform they're on, they are", "Regardless, of what platform there on their"], correct: 2, explanation: "Uses correct 'they're' (they are) and puts a comma after the dependent clause." },
+      { id: 47, passage: "The layperson associates Newton with gravity and Einstein with relativity, failing to understand the magnitude of ______ contribution.", question: "Which choice completes the text conforming to Standard English?", options: ["either scientist's", "either scientists'", "each scientists", "each scientists'"], correct: 0, explanation: "Needs possessive for 'either scientist.' As possession and apostrophe are required, eliminate (C). Eliminate (B) and (D) for plural 'scientists' since 'either' refers to one scientist." },
+      { id: 48, passage: "Commerson and Baret were aboard the Boudeuse and Étoile. They visited Montevideo, Uruguay; ___________ and New Ireland.", question: "Which choice completes the text conforming to Standard English?", options: ["the city of Rio de Janeiro, Brazil", "the city of Rio de Janeiro: Brazil", "the city of Rio de Janeiro, Brazil;", "the city, of Rio de Janeiro Brazil,"], correct: 2, explanation: "Choice (C) correctly uses comma and semicolon as part of a list with internal commas." },
+      { id: 49, passage: "Sweden's aggressive Great Depression policies came with a price tag, particularly massive public works investment. ______ creating a large federal deficit, in 1934 Sweden became the first country to fully emerge from the Depression, and foreign creditors were quickly recompensed.", question: "Which choice completes the text with the most logical transition?", options: ["Despite", "For", "By", "With"], correct: 0, explanation: 'Sweden spent heavily (which would suggest debt problems) but paid back creditors quickly. "Despite" expresses this contrast.' },
+      { id: 50, passage: "Humorism held medical discovery back for centuries; it established insularity cutting medicine off from biology, chemistry, and physics, generating a long-lived illusion of comprehensiveness that rejected revision. ________ humorism was a far more persistent enemy of medical science than superstition because it wore the guise of naturalism.", question: "Which choice completes the text with the most logical transition?", options: ["In contrast,", "Further,", "Still,", "Somewhat"], correct: 1, explanation: '"Further" indicates what follows builds upon the argument already presented.' },
+      { id: 51, passage: "When people understand time and diversification, they need one final thing: a sense of calm. Panic buying and selling is never a good idea. If an account was started early and properly diversified, ______ severe market downturns should not incite panic. Instead, clear-thinking investors see the market will correct.", question: "Which choice completes the text with the most logical transition?", options: ["thus", "even", "so", "while"], correct: 1, explanation: '"Even" emphasizes that severe market downturns should not incite panic.' },
+      { id: 52, passage: "Notes on intelligence quotients:\n• IQ (Intelligence Quotient), EQ (Emotional Quotient), SQ (Social Quotient), AQ (Adversity Quotient).\n• People who develop IQ but no emotional/social skills may struggle to succeed.\n• AQ measures how well people bounce back from adversity.\n• Without AQ, people may quickly give up and see failures as permanent.\n• Parents should develop variety of skills, not just academics.\n\nThe student wants to introduce AQ to an audience familiar with IQ.", question: "Which choice most effectively uses relevant information?", options: ["In contrast to IQ, AQ examines the characteristic most important to success.", "Unlike IQ, AQ is less focused on intelligence and more on personal grit when faced with adversity.", "While people can succeed without AQ, it is impossible without IQ.", "Between IQ and AQ, AQ is more important to academic achievement."], correct: 1, explanation: "An audience familiar with IQ knows it's associated with intelligence. Choice (B) builds off this by contrasting AQ and IQ." },
+      { id: 53, passage: "Notes on sustainable agriculture:\n• Stover mulching uses leftover plant material to regenerate soil.\n• Genome editing increases nutrient use efficiency.\n• Silt traps prevent agricultural run-off from reaching waterways.\n• Companion planting involves planting mutually beneficial crops closely.\n\nThe student wants to suggest a low-tech sustainable agricultural practice.", question: "Which choice most effectively uses relevant information?", options: ["Factory manufacturing of silt traps can prevent river pollution.", "When two companion plants are grown near one another, they both benefit.", "Scientists should utilize gene editing to decrease fertilizer waste.", "Stover mulch can potentially be turned into renewable biofuels."], correct: 1, explanation: "The student wants a low-tech solution. Simply planting crops close to each other (companion planting) requires no technology." },
+      { id: 54, passage: "Notes on ethical theories:\n• Utilitarianism: benefits outweigh costs = ethical.\n• Deontology: ethical if following universal moral laws.\n• Deontologists argue to follow ethical rules even if costs outweigh benefits; following duty is paramount.\n\nThe student wants to give an example approved by a utilitarian but disapproved by a deontologist.", question: "Which choice most effectively uses relevant information?", options: ["A politician lies to secure higher office but implements helpful policies when elected.", "A teacher strongly penalizes cheating, making students less likely to collaborate.", "A mathematician makes a calculator error that results in a bridge collapsing.", "A computer programmer creates a new programming language for improved virtual reality."], correct: 0, explanation: "A utilitarian looks at outcomes; a deontologist looks at rules. Choice (A): the politician violates a rule against lying but serves the greater good—approved by utilitarian, not deontologist." }
+    ];
+
+    const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzmdS5AzGAUDd1-Al31tfBJYchRBz_0wy8XBQM7MEoeiUAjpwK2aS8eUOf05zc4TL5G/exec";
+
+    // ==================== TIMER COMPONENT ====================
+    function Timer({ totalMinutes, onTimeUp }) {
+      const [timeRemaining, setTimeRemaining] = useState(totalMinutes * 60);
+      const [isWarning, setIsWarning] = useState(false);
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setTimeRemaining((prev) => {
+            if (prev <= 1) { clearInterval(interval); onTimeUp(0); return 0; }
+            return prev - 1;
+          });
+        }, 1000);
+        return () => clearInterval(interval);
+      }, []);
+
+      useEffect(() => { setIsWarning(timeRemaining <= 300); }, [timeRemaining]);
+
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+
+      return (
+        <div className={"flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg font-bold " + (isWarning ? "bg-red-100 text-red-700 border border-red-300 animate-pulse" : "bg-blue-100 text-blue-700 border border-blue-300")}>
+          {isWarning && <span>&#9888;</span>}
+          <span>&#9201;</span>
+          <span>{minutes.toString().padStart(2,"0")}:{seconds.toString().padStart(2,"0")}</span>
+        </div>
+      );
+    }
+
+    // ==================== QUESTION NAV ====================
+    function QuestionNav({ totalQuestions, currentQuestion, answers, onQuestionSelect }) {
+      return (
+        <div className="bg-white rounded-xl shadow-md border border-blue-200 p-4">
+          <h3 className="text-sm font-semibold text-blue-900 mb-3">Question Navigator</h3>
+          <div className="grid grid-cols-9 gap-1.5">
+            {Array.from({length: totalQuestions}, (_, i) => {
+              const isAnswered = answers[i] !== null && answers[i] !== undefined;
+              const isCurrent = i === currentQuestion;
+              return (
+                <button key={i} onClick={() => onQuestionSelect(i)}
+                  className={`w-8 h-8 text-xs font-semibold rounded-md transition-all ${
+                    isCurrent ? "bg-blue-600 text-white border-2 border-blue-800" : 
+                    isAnswered ? "bg-green-500 text-white hover:bg-green-600" : 
+                    "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-300"
+                  }`}>{i + 1}</button>
+              );
+            })}
+          </div>
+          <div className="flex gap-4 mt-4 text-xs">
+            <div className="flex items-center gap-1.5"><div className="w-4 h-4 bg-green-500 rounded"></div><span className="text-gray-600">Answered</span></div>
+            <div className="flex items-center gap-1.5"><div className="w-4 h-4 bg-blue-600 rounded border-2 border-blue-800"></div><span className="text-gray-600">Current</span></div>
+            <div className="flex items-center gap-1.5"><div className="w-4 h-4 bg-gray-100 border border-gray-300 rounded"></div><span className="text-gray-600">Unanswered</span></div>
+          </div>
+        </div>
+      );
+    }
+
+    // ==================== MAIN APP ====================
+    function App() {
+      const [appState, setAppState] = useState('welcome'); // welcome, form, quiz, moduleTransition, results
+      const [studentName, setStudentName] = useState('');
+      const [currentModule, setCurrentModule] = useState(1);
+      const [currentQuestion, setCurrentQuestion] = useState(0);
+      const [answersM1, setAnswersM1] = useState(Array(27).fill(null));
+      const [answersM2, setAnswersM2] = useState(Array(27).fill(null));
+      const [score, setScore] = useState(0);
+      const [dataSent, setDataSent] = useState(false);
+      const [showReview, setShowReview] = useState(false);
+      const [timeRemainingM1, setTimeRemainingM1] = useState(32 * 60);
+      const [timeRemainingM2, setTimeRemainingM2] = useState(32 * 60);
+
+      const questions = currentModule === 1 ? questionsModule1 : questionsModule2;
+      const answers = currentModule === 1 ? answersM1 : answersM2;
+
+      const handleStart = () => setAppState('form');
+
+      const handleSubmitName = (e) => {
+        e.preventDefault();
+        const name = e.target.studentName.value.trim();
+        if (!name) return;
+        setStudentName(name);
+        setAppState('quiz');
+        setCurrentModule(1);
+        setCurrentQuestion(0);
+      };
+
+      const handleAnswerSelect = (value) => {
+        const idx = parseInt(value);
+        if (currentModule === 1) {
+          const newAnswers = [...answersM1];
+          newAnswers[currentQuestion] = idx;
+          setAnswersM1(newAnswers);
+        } else {
+          const newAnswers = [...answersM2];
+          newAnswers[currentQuestion] = idx;
+          setAnswersM2(newAnswers);
+        }
+      };
+
+      const handleNext = () => {
+        if (currentQuestion < questions.length - 1) {
+          setCurrentQuestion(currentQuestion + 1);
+        }
+      };
+
+      const handlePrevious = () => {
+        if (currentQuestion > 0) {
+          setCurrentQuestion(currentQuestion - 1);
+        }
+      };
+
+      const handleTimeUp = (time) => {
+        if (currentModule === 1) {
+          setTimeRemainingM1(time);
+          setAppState('moduleTransition');
+        } else {
+          setTimeRemainingM2(time);
+          finishTest(time);
+        }
+      };
+
+      const handleSubmitModule1 = () => {
+        setTimeRemainingM1(0);
+        setAppState('moduleTransition');
+      };
+
+      const startModule2 = () => {
+        setCurrentModule(2);
+        setCurrentQuestion(0);
+        setAppState('quiz');
+      };
+
+      const finishTest = (timeM2) => {
+        let correct = 0;
+        questionsModule1.forEach((q, i) => { if (answersM1[i] === q.correct) correct++; });
+        questionsModule2.forEach((q, i) => { if (answersM2[i] === q.correct) correct++; });
+        setScore(correct);
+        if (timeM2 !== undefined) setTimeRemainingM2(timeM2);
+        setAppState('results');
+
+        // Send to Google Sheets
+        console.log("Attempting to send results to Google Sheets...");
+        if (GOOGLE_SHEETS_URL && !dataSent) {
+          const payload = {
+            timestamp: new Date().toISOString(),
+            studentName,
+            module1Score: answersM1.filter((a,i) => a === questionsModule1[i].correct).length + "/27",
+            module2Score: answersM2.filter((a,i) => a === questionsModule2[i].correct).length + "/27",
+            totalScore: correct + "/54",
+            percentage: Math.round((correct/54)*100) + "%",
+            timeUsedM1: (32*60 - timeRemainingM1),
+            timeUsedM2: (32*60 - (timeM2 || 0))
+          };
+          console.log("Payload:", payload);
+          fetch(GOOGLE_SHEETS_URL, { method: "POST", mode: "no-cors", headers: {"Content-Type":"application/json"}, body: JSON.stringify(payload) })
+            .then(() => { console.log("Results sent to Google Sheets successfully!"); setDataSent(true); })
+            .catch((err) => { console.error("Error sending to Google Sheets:", err); });
+        }
+      };
+
+      // ========== WELCOME SCREEN ==========
+      if (appState === 'welcome') {
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex flex-col items-center justify-center p-4">
+            <div className="mb-8">
+              <img src="https://i.postimg.cc/SN0732Kt/emblema-GEA.jpg" alt="GEA" className="h-24" />
+            </div>
+            <div className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-blue-200 p-8">
+              <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold text-blue-900 mb-2">SAT Practice Test</h1>
+                <h2 className="text-2xl font-semibold text-blue-700">English Section</h2>
+                <p className="text-blue-600 mt-2">Modules 1 &amp; 2</p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                  <h3 className="font-semibold text-blue-900 mb-3">Time Limit</h3>
+                  <p className="text-blue-800 font-semibold">32 minutes per module</p>
+                  <p className="text-blue-600 text-sm mt-1">Separate timers</p>
+                </div>
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                  <h3 className="font-semibold text-blue-900 mb-3">Questions</h3>
+                  <p className="text-blue-800 font-semibold">27 questions per module</p>
+                  <p className="text-blue-600 text-sm mt-1">54 questions total</p>
+                </div>
+              </div>
+              <div className="text-center">
+                <button onClick={handleStart} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-12 py-4 rounded-xl shadow-lg transition-all hover:scale-105 font-semibold">
+                  Start Practice Test
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ========== STUDENT FORM ==========
+      if (appState === 'form') {
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex flex-col items-center justify-center p-4">
+            <div className="mb-8"><img src="https://i.postimg.cc/SN0732Kt/emblema-GEA.jpg" alt="GEA" className="h-24" /></div>
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-blue-200 p-8">
+              <div className="text-center mb-6">
+                <h1 className="text-2xl font-bold text-blue-900 mb-2">Student Information</h1>
+                <p className="text-blue-600">Please enter your name to begin</p>
+              </div>
+              <form onSubmit={handleSubmitName} className="space-y-4">
+                <div>
+                  <label className="text-blue-900 font-semibold block mb-2">Student Name</label>
+                  <input name="studentName" type="text" placeholder="Enter your full name" required
+                    className="w-full border border-blue-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none" />
+                </div>
+                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl shadow-lg transition-all hover:scale-105 font-semibold">
+                  Continue to Test
+                </button>
+              </form>
+            </div>
+          </div>
+        );
+      }
+
+      // ========== MODULE TRANSITION ==========
+      if (appState === 'moduleTransition') {
+        const m1Answered = answersM1.filter(a => a !== null).length;
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
+            <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-blue-200 p-8 text-center">
+              <div className="mb-6">
+                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-4xl">&#9989;</span>
+                </div>
+                <h1 className="text-3xl font-bold text-blue-900 mb-2">Module 1 Complete!</h1>
+              </div>
+              <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                <h2 className="text-xl font-semibold text-blue-800 mb-4">Module 1 Results</h2>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-white rounded-lg p-4">
+                    <p className="text-sm text-gray-600">Answered</p>
+                    <p className="text-2xl font-bold text-green-600">{m1Answered}</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-4">
+                    <p className="text-sm text-gray-600">Unanswered</p>
+                    <p className="text-2xl font-bold text-amber-600">{27 - m1Answered}</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-4">
+                    <p className="text-sm text-gray-600">Total</p>
+                    <p className="text-2xl font-bold text-blue-900">27</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8">
+                <h3 className="text-xl font-semibold text-amber-800 mb-2">Ready for Module 2?</h3>
+                <p className="text-amber-700">You now have <span className="font-bold">32 minutes</span> to complete 27 questions.</p>
+              </div>
+              <button onClick={startModule2} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-4 rounded-xl shadow-lg transition-all hover:scale-105 font-semibold">
+                Start Module 2 &#10132;
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      // ========== QUIZ ==========
+      if (appState === 'quiz') {
+        const q = questions[currentQuestion];
+        const answeredCount = answers.filter(a => a !== null && a !== undefined).length;
+
+        return (
+          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 p-4">
+            <div className="max-w-6xl mx-auto mb-4">
+              <div className="flex items-center justify-between bg-white rounded-xl shadow-md p-4 border border-blue-200">
+                <div className="flex items-center gap-4">
+                  <img src="https://i.postimg.cc/SN0732Kt/emblema-GEA.jpg" alt="GEA" className="h-12" />
+                  <div>
+                    <h1 className="text-xl font-bold text-blue-900">SAT Practice Test</h1>
+                    <p className="text-sm text-blue-600">Module {currentModule} - {studentName}</p>
+                  </div>
+                </div>
+                <Timer totalMinutes={32} onTimeUp={handleTimeUp} />
+              </div>
+            </div>
+
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-4 gap-4">
+              <div className="lg:col-span-1">
+                <QuestionNav totalQuestions={questions.length} currentQuestion={currentQuestion}
+                  answers={answers} onQuestionSelect={setCurrentQuestion} />
+              </div>
+
+              <div className="lg:col-span-3">
+                <div className="bg-white rounded-2xl shadow-xl border border-blue-200 p-6">
+                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-blue-100">
+                    <div className="flex items-center gap-3">
+                      <span className="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-semibold">Module {currentModule}</span>
+                      <span className="text-gray-600">Question {currentQuestion + 1} of {questions.length}</span>
+                    </div>
+                    <span className="text-gray-400 text-sm">{answeredCount}/{questions.length} answered</span>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="text-gray-800 leading-relaxed text-sm whitespace-pre-line">{q.passage}</p>
+                    </div>
+                    <div>
+                      <p className="text-base text-gray-800 leading-relaxed mb-4">{q.question}</p>
+                      <div className="space-y-2">
+                        {q.options.map((option, index) => (
+                          <label key={index}
+                            className={`flex items-start gap-2 p-3 rounded-lg border-2 transition-all cursor-pointer ${
+                              answers[currentQuestion] === index ? "border-blue-500 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50"
+                            }`}
+                            onClick={() => handleAnswerSelect(index.toString())}>
+                            <input type="radio" name="answer" value={index}
+                              checked={answers[currentQuestion] === index}
+                              onChange={() => handleAnswerSelect(index.toString())}
+                              className="mt-1" />
+                            <span className="flex-1 text-gray-700 leading-relaxed text-sm">
+                              <span className="font-semibold text-blue-600 mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-8 pt-6 border-t border-blue-100">
+                    <button onClick={handlePrevious} disabled={currentQuestion === 0}
+                      className="px-4 py-2 border border-blue-300 text-blue-700 rounded-lg hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                      &#8592; Previous
+                    </button>
+                    {currentModule === 1 && currentQuestion === questions.length - 1 ? (
+                      <button onClick={handleSubmitModule1}
+                        className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-lg font-semibold">
+                        Finish Module 1
+                      </button>
+                    ) : currentQuestion === questions.length - 1 ? (
+                      <button onClick={() => finishTest()}
+                        className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold">
+                        &#9873; Submit Test
+                      </button>
+                    ) : (
+                      <button onClick={handleNext}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">
+                        Next &#8594;
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ========== RESULTS ==========
+      const totalCorrect = score;
+      const totalQuestions = 54;
+      const percentage = Math.round((totalCorrect / totalQuestions) * 100);
+      const m1Correct = answersM1.filter((a, i) => a === questionsModule1[i].correct).length;
+      const m2Correct = answersM2.filter((a, i) => a === questionsModule2[i].correct).length;
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 p-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <img src="https://i.postimg.cc/SN0732Kt/emblema-GEA.jpg" alt="GEA" className="h-20 mx-auto mb-4" />
+              <h1 className="text-3xl font-bold text-blue-900">Test Results</h1>
+              <p className="text-blue-600">SAT English Practice Test</p>
+              <p className="text-lg text-blue-800 font-semibold mt-2">{studentName}</p>
+              {dataSent && <p className="text-green-600 text-sm mt-2">&#10003; Results saved to Google Sheets</p>}
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-xl border border-blue-200 p-8 mb-6">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-blue-100 mb-4">
+                    <div>
+                      <span className="text-3xl font-bold text-blue-900">{percentage}%</span>
+                      <p className="text-sm font-semibold text-blue-700">{percentage >= 80 ? "Excellent" : percentage >= 60 ? "Good" : percentage >= 40 ? "Average" : "Needs Improvement"}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-600">{totalCorrect} correct out of {totalQuestions}</p>
+                </div>
+                <div className="bg-blue-50 rounded-xl p-4 text-center">
+                  <h3 className="font-semibold text-blue-900 mb-2">Module 1</h3>
+                  <p className="text-2xl font-bold text-blue-900">{m1Correct}/27</p>
+                </div>
+                <div className="bg-blue-50 rounded-xl p-4 text-center">
+                  <h3 className="font-semibold text-blue-900 mb-2">Module 2</h3>
+                  <p className="text-2xl font-bold text-blue-900">{m2Correct}/27</p>
+                </div>
+              </div>
+
+              <div className="text-center mb-8">
+                {!showReview ? (
+                  <button onClick={() => setShowReview(true)}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg px-10 py-4 rounded-xl shadow-lg transition-all hover:scale-105 font-semibold">
+                    &#128065; View Detailed Answers
+                  </button>
+                ) : (
+                  <button onClick={() => setShowReview(false)}
+                    className="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-xl shadow-lg transition-all font-semibold">
+                    &#9650; Hide Detailed Answers
+                  </button>
+                )}
+              </div>
+
+              {showReview && (
+              <div className="space-y-4">
+                <h2 className="text-xl font-bold text-blue-900">Answer Review</h2>
+                {[1, 2].map(mod => {
+                  const modQuestions = mod === 1 ? questionsModule1 : questionsModule2;
+                  const modAnswers = mod === 1 ? answersM1 : answersM2;
+                  const modCorrect = mod === 1 ? m1Correct : m2Correct;
+                  return (
+                    <div key={mod} className="mb-6">
+                      <h3 className="text-lg font-semibold text-blue-800 mb-3 bg-blue-100 px-4 py-2 rounded-lg">Module {mod}: {modCorrect}/27 correct</h3>
+                      <div className="space-y-3">
+                        {modQuestions.map((q, idx) => {
+                          const isCorrect = modAnswers[idx] === q.correct;
+                          return (
+                            <div key={q.id} className={`border-l-4 ${isCorrect ? 'border-l-green-500' : 'border-l-red-500'} bg-white rounded-lg shadow-md p-4`}>
+                              <div className="flex items-start gap-4">
+                                <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${isCorrect ? 'bg-green-100' : 'bg-red-100'}`}>
+                                  <span className={isCorrect ? 'text-green-600 text-xl' : 'text-red-600 text-xl'}>{isCorrect ? '&#10003;' : '&#10007;'}</span>
+                                </div>
+                                <div className="flex-1">
+                                  <p className="font-semibold text-blue-900 mb-1">Question {idx + 1}</p>
+                                  {modAnswers[idx] === null && <p className="text-amber-600 text-sm mb-2 font-semibold">(Unanswered)</p>}
+                                  <p className="text-gray-700 text-sm mb-3">{q.passage.substring(0, 120)}...</p>
+                                  <div className="space-y-1.5 mb-3">
+                                    {q.options.map((opt, optIdx) => {
+                                      const letter = String.fromCharCode(65 + optIdx);
+                                      const isCorrectOption = optIdx === q.correct;
+                                      const isStudentOption = modAnswers[idx] === optIdx;
+                                      const wasAnswered = modAnswers[idx] !== null;
+                                      let bgClass = "bg-gray-50 border-gray-200";
+                                      let icon = "";
+                                      if (isCorrectOption && wasAnswered) {
+                                        bgClass = "bg-green-100 border-green-400";
+                                        icon = "&#10003; ";
+                                      } else if (isStudentOption && !isCorrectOption && wasAnswered) {
+                                        bgClass = "bg-red-100 border-red-400";
+                                        icon = "&#10007; ";
+                                      } else if (isCorrectOption && !wasAnswered) {
+                                        bgClass = "bg-green-50 border-green-300";
+                                        icon = "&#10003; ";
+                                      }
+                                      return (
+                                        <div key={optIdx} className={`flex items-start gap-2 p-2 rounded-lg border ${bgClass}`}>
+                                          <span className="text-sm font-bold min-w-[24px]">{icon}{letter}.</span>
+                                          <span className="text-sm text-gray-800">{opt}</span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                  <div className="bg-blue-50 rounded-lg p-3">
+                                    <p className="text-sm text-gray-600"><span className="font-semibold">Explanation:</span> {q.explanation}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              )}
+
+              <div className="text-center mt-8">
+                <button onClick={() => window.location.reload()}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg">
+                  &#8635; Take Test Again
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
